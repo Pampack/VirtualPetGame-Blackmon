@@ -6,6 +6,15 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
+    //////////////////////////////////////////////
+    //Assignment/Lab/Project: Virtual Pet Game
+    //Name: Riley Blackmon
+    //Section: SGD.213.2172
+    //Instructor: Brian Sowers
+    //Date: 02/26/2024
+    /////////////////////////////////////////////
+
+
     [SerializeField] private Button startButton;
     [SerializeField] private GameObject startPanel;
     [SerializeField] private GameObject gamePanel;
@@ -15,6 +24,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private TMP_Text petFullnessText;
     [SerializeField] private TMP_Text petHappinessText;
     [SerializeField] private TMP_Text petEnergyText;
+    [SerializeField] private TMP_Text endReasonText;
     Pet userPet;
 
     // Start is called before the first frame update
@@ -95,5 +105,30 @@ public class UIController : MonoBehaviour
     {
         gamePanel.SetActive(false);
         endPanel.SetActive(true);
+        
+        if(userPet.Happiness <= 0)
+        {
+            endReasonText.text = "Your pet was taken! It got too unhappy.";
+        }
+        else if (userPet.Fullness <= 0)
+        {
+            endReasonText.text = "Your pet was taken! It got too hungry.";
+        }
+        else
+        {
+            endReasonText.text = "Your pet was taken! It got too tired.";
+        }
+    }
+
+    public void OnRetryButtonClick()
+    {
+        endPanel.SetActive(false);
+        startPanel.SetActive(true);
+        nameInput.text = "";
+    }
+
+    public void OnQuitButtonClick()
+    {
+        Application.Quit();
     }
 }
